@@ -133,7 +133,7 @@
                 <configuration>
                     
                     <server>TomcatServer</server>
-                    <url>${remote.server}</url>
+                    <url>${nbang.dk}</url>
                     <username>${remote.user}</username>
                     <password>${remote.password}</password>
                     <update>true</update>    
