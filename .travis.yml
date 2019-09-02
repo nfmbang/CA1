@@ -17,7 +17,7 @@ script:
 #services:
  #  - mysql
 
-before_script:
+#before_script:
 
 # TODO Add variable to make it simple to be reusable for all semester projects
 #- export DEBIAN_FRONTEND="noninteractive";
