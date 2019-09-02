@@ -34,6 +34,7 @@ public class FacadeExampleTest {
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
         facade = FacadeExample.getFacadeExample(emf);
+        String s = "build plx";
     }
 
     /*   **** HINT ****
