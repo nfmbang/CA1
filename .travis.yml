@@ -20,7 +20,7 @@ services:
 before_script:
 
 #TODO Add variable to make it simple to be reusable for all semester projects
- - export DEBIAN_FRONTEND="noninteractive";
+- export DEBIAN_FRONTEND="noninteractive";
 - PW="ax2"
 - USER_NAME="dev"
 
