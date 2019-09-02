@@ -49,3 +49,4 @@ before_script:
 - sudo systemctl start mysql
 - mysql --version
 - echo "before_script Complete"
+
