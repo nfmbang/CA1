@@ -44,25 +44,24 @@ public class RenameMeResourceTest {
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST, Strategy.CREATE);
 
-        //NOT Required if you use the version of EMF_Creator.createEntityManagerFactory used above        
+        //NOT Required if you use the version of EMF_Creator.createEntityManagerFactory used above
         //System.setProperty("IS_TEST", TEST_DB);
         //We are using the database on the virtual Vagrant image, so username password are the same for all dev-databases
-        
         httpServer = startServer();
-        
+
         //Setup RestAssured
         RestAssured.baseURI = SERVER_URL;
         RestAssured.port = SERVER_PORT;
-   
+
         RestAssured.defaultParser = Parser.JSON;
     }
-    
+
     @AfterAll
-    public static void closeTestServer(){
+    public static void closeTestServer() {
         //System.in.read();
-         httpServer.shutdownNow();
+        httpServer.shutdownNow();
     }
-    
+
     // Setup the DataBase (used by the test-server and this test) in a known state BEFORE EACH TEST
     //TODO -- Make sure to change the script below to use YOUR OWN entity class
     @BeforeEach
@@ -71,39 +70,42 @@ public class RenameMeResourceTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new RenameMe("Some txt","More text"));
-            em.persist(new RenameMe("aaa","bbb"));
-           
+            em.persist(new RenameMe("Some txt", "More text"));
+            em.persist(new RenameMe("aaa", "bbb"));
+
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
-    
+
+    @Disabled
     @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
         given().when().get("/xxx").then().statusCode(200);
     }
-   
+
     //This test assumes the database contains two rows
+    @Disabled
     @Test
     public void testDummyMsg() throws Exception {
         given()
-        .contentType("application/json")
-        .get("/xxx/").then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("msg", equalTo("Hello World"));   
+                .contentType("application/json")
+                .get("/xxx/").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("msg", equalTo("Hello World"));
     }
-    
+
+    @Disabled
     @Test
     public void testCount() throws Exception {
         given()
-        .contentType("application/json")
-        .get("/xxx/count").then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("count", equalTo(2));   
+                .contentType("application/json")
+                .get("/xxx/count").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("count", equalTo(2));
     }
 }
