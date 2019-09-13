@@ -58,11 +58,6 @@ public class MembersResourceTest {
         emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST, Strategy.DROP_AND_CREATE);
         httpServer = startServer();
 
-        //Setup variables
-        A = new Members("cph-nb168", "Niels B", "Rød");
-        B = new Members("cph-mn521", "Martin W", "Rød");
-        C = new Members("cph-jh409", "Jonatan H", "Gul-Rød");
-
         //Setup RestAssured
         RestAssured.baseURI = SERVER_URL;
         RestAssured.port = SERVER_PORT;
@@ -85,6 +80,12 @@ public class MembersResourceTest {
             em.getTransaction().begin();
             em.createNamedQuery("Members.deleteAllRows").executeUpdate();
 
+            //Setup variables
+            A = new Members("cph-nb168", "Niels B", "Rød");
+            B = new Members("cph-mn521", "Martin W", "Rød");
+            C = new Members("cph-jh409", "Jonatan H", "Gul-Rød");
+
+            //Save variables to DB
             em.persist(A);
             em.persist(B);
             em.persist(C);
